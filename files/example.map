@@ -53,32 +53,6 @@ LAYER
 END
 
 LAYER
-  NAME tl_2017_us_county
-  TYPE POLYGON
-  DATA tl_2017_us_county
-  STATUS OFF
-  CLASS
-  OUTLINECOLOR 255 255 255
-  END
-END
-
-LAYER
-  NAME tl_2017_us_county_solid
-  TYPE POLYGON
-  DATA tl_2017_us_county
-  STATUS OFF
-  CLASS
-  STYLE
-    COLOR 0 255 0
-  END
-  NAME "County"
-  OUTLINECOLOR 0 0 0
-  END
-END
-
-END
-
-LAYER
   NAME tl_2017_us_state_Alabama
   TYPE POLYGON
   DATA tl_2017_us_state
@@ -933,3 +907,28 @@ LAYER
   END
 END
 
+LAYER
+  NAME tl_2017_us_county
+  TYPE POLYGON
+  DATA tl_2017_us_county
+  STATUS OFF
+  CLASS
+  OUTLINECOLOR 255 255 255
+  END
+END
+
+LAYER
+  NAME tl_2017_us_county_solid
+  TYPE POLYGON
+  DATA tl_2017_us_county
+  STATUS OFF
+  CLASS
+  STYLE
+    COLOR 0 255 0
+  END
+  NAME "County"
+  OUTLINECOLOR 0 0 0
+  END
+END
+
+END
