@@ -1,0 +1,935 @@
+MAP
+
+NAME Example
+#EXTENT -180 -90 180 90
+#EXTENT -170 42 -60 50
+#EXTENT -120 28 -80 34
+EXTENT -90 24 -80 34
+SIZE 1500 750
+IMAGETYPE PNG
+SHAPEPATH      "../data"
+
+WEB
+  IMAGEPATH '/var/www/html/mapserver/tmp/'
+  IMAGEURL  '/ms_tmp/'
+END
+
+CONFIG "MS_ERRORFILE" "/var/log/mapserver/debug"
+
+LAYER
+  NAME "bluemarble"
+  METADATA
+    "wms_title"             "Blue Marble World Raster"
+    "wms_attribution_title" "NASA Blue Marble"
+  END
+  TYPE RASTER
+  STATUS ON
+  DATA "/var/www/html/mapserver/data/raster/bluemarble.tif"
+END
+
+LAYER
+  NAME tl_2017_us_state
+  TYPE POLYGON
+  DATA tl_2017_us_state
+  STATUS OFF
+  CLASS
+  NAME "States"
+  OUTLINECOLOR 255 255 255
+  END
+END
+
+LAYER
+  NAME tl_2017_us_state_solid
+  TYPE POLYGON
+  DATA tl_2017_us_state
+  STATUS OFF
+  CLASS
+  STYLE
+    COLOR 0 255 0
+  END
+  NAME "States"
+  OUTLINECOLOR 0 0 0
+  END
+END
+
+LAYER
+  NAME tl_2017_us_county
+  TYPE POLYGON
+  DATA tl_2017_us_county
+  STATUS OFF
+  CLASS
+  OUTLINECOLOR 255 255 255
+  END
+END
+
+LAYER
+  NAME tl_2017_us_county_solid
+  TYPE POLYGON
+  DATA tl_2017_us_county
+  STATUS OFF
+  CLASS
+  STYLE
+    COLOR 0 255 0
+  END
+  NAME "County"
+  OUTLINECOLOR 0 0 0
+  END
+END
+
+END
+
+LAYER
+  NAME tl_2017_us_state_Alabama
+  TYPE POLYGON
+  DATA tl_2017_us_state
+  STATUS OFF
+  FILTER ("[NAME]"="Alabama")
+  CLASS
+  STYLE
+    COLOR 0 255 255
+  END
+  NAME "State_Alabama"
+  OUTLINECOLOR 0 0 0
+  END
+END
+
+LAYER
+  NAME tl_2017_us_state_Alaska
+  TYPE POLYGON
+  DATA tl_2017_us_state
+  STATUS OFF
+  FILTER ("[NAME]"="Alaska")
+  CLASS
+  STYLE
+    COLOR 0 255 255
+  END
+  NAME "State_Alaska"
+  OUTLINECOLOR 0 0 0
+  END
+END
+
+LAYER
+  NAME tl_2017_us_state_American_Samoa
+  TYPE POLYGON
+  DATA tl_2017_us_state
+  STATUS OFF
+  FILTER ("[NAME]"="American Samoa")
+  CLASS
+  STYLE
+    COLOR 0 255 255
+  END
+  NAME "State_American_Samoa"
+  OUTLINECOLOR 0 0 0
+  END
+END
+
+LAYER
+  NAME tl_2017_us_state_Arizona
+  TYPE POLYGON
+  DATA tl_2017_us_state
+  STATUS OFF
+  FILTER ("[NAME]"="Arizona")
+  CLASS
+  STYLE
+    COLOR 0 255 255
+  END
+  NAME "State_Arizona"
+  OUTLINECOLOR 0 0 0
+  END
+END
+
+LAYER
+  NAME tl_2017_us_state_Arkansas
+  TYPE POLYGON
+  DATA tl_2017_us_state
+  STATUS OFF
+  FILTER ("[NAME]"="Arkansas")
+  CLASS
+  STYLE
+    COLOR 0 255 255
+  END
+  NAME "State_Arkansas"
+  OUTLINECOLOR 0 0 0
+  END
+END
+
+LAYER
+  NAME tl_2017_us_state_California
+  TYPE POLYGON
+  DATA tl_2017_us_state
+  STATUS OFF
+  FILTER ("[NAME]"="California")
+  CLASS
+  STYLE
+    COLOR 0 255 255
+  END
+  NAME "State_California"
+  OUTLINECOLOR 0 0 0
+  END
+END
+
+LAYER
+  NAME tl_2017_us_state_Colorado
+  TYPE POLYGON
+  DATA tl_2017_us_state
+  STATUS OFF
+  FILTER ("[NAME]"="Colorado")
+  CLASS
+  STYLE
+    COLOR 0 255 255
+  END
+  NAME "State_Colorado"
+  OUTLINECOLOR 0 0 0
+  END
+END
+
+LAYER
+  NAME tl_2017_us_state_Commonwealth_of_the_Northern_Mariana_Islands
+  TYPE POLYGON
+  DATA tl_2017_us_state
+  STATUS OFF
+  FILTER ("[NAME]"="Commonwealth of the Northern Mariana Islands")
+  CLASS
+  STYLE
+    COLOR 0 255 255
+  END
+  NAME "State_Commonwealth_of_the_Northern_Mariana_Islands"
+  OUTLINECOLOR 0 0 0
+  END
+END
+
+LAYER
+  NAME tl_2017_us_state_Connecticut
+  TYPE POLYGON
+  DATA tl_2017_us_state
+  STATUS OFF
+  FILTER ("[NAME]"="Connecticut")
+  CLASS
+  STYLE
+    COLOR 0 255 255
+  END
+  NAME "State_Connecticut"
+  OUTLINECOLOR 0 0 0
+  END
+END
+
+LAYER
+  NAME tl_2017_us_state_Delaware
+  TYPE POLYGON
+  DATA tl_2017_us_state
+  STATUS OFF
+  FILTER ("[NAME]"="Delaware")
+  CLASS
+  STYLE
+    COLOR 0 255 255
+  END
+  NAME "State_Delaware"
+  OUTLINECOLOR 0 0 0
+  END
+END
+
+LAYER
+  NAME tl_2017_us_state_District_of_Columbia
+  TYPE POLYGON
+  DATA tl_2017_us_state
+  STATUS OFF
+  FILTER ("[NAME]"="District of Columbia")
+  CLASS
+  STYLE
+    COLOR 0 255 255
+  END
+  NAME "State_District_of_Columbia"
+  OUTLINECOLOR 0 0 0
+  END
+END
+
+LAYER
+  NAME tl_2017_us_state_Florida
+  TYPE POLYGON
+  DATA tl_2017_us_state
+  STATUS OFF
+  FILTER ("[NAME]"="Florida")
+  CLASS
+  STYLE
+    COLOR 0 255 255
+  END
+  NAME "State_Florida"
+  OUTLINECOLOR 0 0 0
+  END
+END
+
+LAYER
+  NAME tl_2017_us_state_Georgia
+  TYPE POLYGON
+  DATA tl_2017_us_state
+  STATUS OFF
+  FILTER ("[NAME]"="Georgia")
+  CLASS
+  STYLE
+    COLOR 0 255 255
+  END
+  NAME "State_Georgia"
+  OUTLINECOLOR 0 0 0
+  END
+END
+
+LAYER
+  NAME tl_2017_us_state_Guam
+  TYPE POLYGON
+  DATA tl_2017_us_state
+  STATUS OFF
+  FILTER ("[NAME]"="Guam")
+  CLASS
+  STYLE
+    COLOR 0 255 255
+  END
+  NAME "State_Guam"
+  OUTLINECOLOR 0 0 0
+  END
+END
+
+LAYER
+  NAME tl_2017_us_state_Hawaii
+  TYPE POLYGON
+  DATA tl_2017_us_state
+  STATUS OFF
+  FILTER ("[NAME]"="Hawaii")
+  CLASS
+  STYLE
+    COLOR 0 255 255
+  END
+  NAME "State_Hawaii"
+  OUTLINECOLOR 0 0 0
+  END
+END
+
+LAYER
+  NAME tl_2017_us_state_Idaho
+  TYPE POLYGON
+  DATA tl_2017_us_state
+  STATUS OFF
+  FILTER ("[NAME]"="Idaho")
+  CLASS
+  STYLE
+    COLOR 0 255 255
+  END
+  NAME "State_Idaho"
+  OUTLINECOLOR 0 0 0
+  END
+END
+
+LAYER
+  NAME tl_2017_us_state_Illinois
+  TYPE POLYGON
+  DATA tl_2017_us_state
+  STATUS OFF
+  FILTER ("[NAME]"="Illinois")
+  CLASS
+  STYLE
+    COLOR 0 255 255
+  END
+  NAME "State_Illinois"
+  OUTLINECOLOR 0 0 0
+  END
+END
+
+LAYER
+  NAME tl_2017_us_state_Indiana
+  TYPE POLYGON
+  DATA tl_2017_us_state
+  STATUS OFF
+  FILTER ("[NAME]"="Indiana")
+  CLASS
+  STYLE
+    COLOR 0 255 255
+  END
+  NAME "State_Indiana"
+  OUTLINECOLOR 0 0 0
+  END
+END
+
+LAYER
+  NAME tl_2017_us_state_Iowa
+  TYPE POLYGON
+  DATA tl_2017_us_state
+  STATUS OFF
+  FILTER ("[NAME]"="Iowa")
+  CLASS
+  STYLE
+    COLOR 0 255 255
+  END
+  NAME "State_Iowa"
+  OUTLINECOLOR 0 0 0
+  END
+END
+
+LAYER
+  NAME tl_2017_us_state_Kansas
+  TYPE POLYGON
+  DATA tl_2017_us_state
+  STATUS OFF
+  FILTER ("[NAME]"="Kansas")
+  CLASS
+  STYLE
+    COLOR 0 255 255
+  END
+  NAME "State_Kansas"
+  OUTLINECOLOR 0 0 0
+  END
+END
+
+LAYER
+  NAME tl_2017_us_state_Kentucky
+  TYPE POLYGON
+  DATA tl_2017_us_state
+  STATUS OFF
+  FILTER ("[NAME]"="Kentucky")
+  CLASS
+  STYLE
+    COLOR 0 255 255
+  END
+  NAME "State_Kentucky"
+  OUTLINECOLOR 0 0 0
+  END
+END
+
+LAYER
+  NAME tl_2017_us_state_Louisiana
+  TYPE POLYGON
+  DATA tl_2017_us_state
+  STATUS OFF
+  FILTER ("[NAME]"="Louisiana")
+  CLASS
+  STYLE
+    COLOR 0 255 255
+  END
+  NAME "State_Louisiana"
+  OUTLINECOLOR 0 0 0
+  END
+END
+
+LAYER
+  NAME tl_2017_us_state_Maine
+  TYPE POLYGON
+  DATA tl_2017_us_state
+  STATUS OFF
+  FILTER ("[NAME]"="Maine")
+  CLASS
+  STYLE
+    COLOR 0 255 255
+  END
+  NAME "State_Maine"
+  OUTLINECOLOR 0 0 0
+  END
+END
+
+LAYER
+  NAME tl_2017_us_state_Maryland
+  TYPE POLYGON
+  DATA tl_2017_us_state
+  STATUS OFF
+  FILTER ("[NAME]"="Maryland")
+  CLASS
+  STYLE
+    COLOR 0 255 255
+  END
+  NAME "State_Maryland"
+  OUTLINECOLOR 0 0 0
+  END
+END
+
+LAYER
+  NAME tl_2017_us_state_Massachusetts
+  TYPE POLYGON
+  DATA tl_2017_us_state
+  STATUS OFF
+  FILTER ("[NAME]"="Massachusetts")
+  CLASS
+  STYLE
+    COLOR 0 255 255
+  END
+  NAME "State_Massachusetts"
+  OUTLINECOLOR 0 0 0
+  END
+END
+
+LAYER
+  NAME tl_2017_us_state_Michigan
+  TYPE POLYGON
+  DATA tl_2017_us_state
+  STATUS OFF
+  FILTER ("[NAME]"="Michigan")
+  CLASS
+  STYLE
+    COLOR 0 255 255
+  END
+  NAME "State_Michigan"
+  OUTLINECOLOR 0 0 0
+  END
+END
+
+LAYER
+  NAME tl_2017_us_state_Minnesota
+  TYPE POLYGON
+  DATA tl_2017_us_state
+  STATUS OFF
+  FILTER ("[NAME]"="Minnesota")
+  CLASS
+  STYLE
+    COLOR 0 255 255
+  END
+  NAME "State_Minnesota"
+  OUTLINECOLOR 0 0 0
+  END
+END
+
+LAYER
+  NAME tl_2017_us_state_Mississippi
+  TYPE POLYGON
+  DATA tl_2017_us_state
+  STATUS OFF
+  FILTER ("[NAME]"="Mississippi")
+  CLASS
+  STYLE
+    COLOR 0 255 255
+  END
+  NAME "State_Mississippi"
+  OUTLINECOLOR 0 0 0
+  END
+END
+
+LAYER
+  NAME tl_2017_us_state_Missouri
+  TYPE POLYGON
+  DATA tl_2017_us_state
+  STATUS OFF
+  FILTER ("[NAME]"="Missouri")
+  CLASS
+  STYLE
+    COLOR 0 255 255
+  END
+  NAME "State_Missouri"
+  OUTLINECOLOR 0 0 0
+  END
+END
+
+LAYER
+  NAME tl_2017_us_state_Montana
+  TYPE POLYGON
+  DATA tl_2017_us_state
+  STATUS OFF
+  FILTER ("[NAME]"="Montana")
+  CLASS
+  STYLE
+    COLOR 0 255 255
+  END
+  NAME "State_Montana"
+  OUTLINECOLOR 0 0 0
+  END
+END
+
+LAYER
+  NAME tl_2017_us_state_NAME:_String_(100.0)
+  TYPE POLYGON
+  DATA tl_2017_us_state
+  STATUS OFF
+  FILTER ("[NAME]"="NAME: String (100.0)")
+  CLASS
+  STYLE
+    COLOR 0 255 255
+  END
+  NAME "State_NAME:_String_(100.0)"
+  OUTLINECOLOR 0 0 0
+  END
+END
+
+LAYER
+  NAME tl_2017_us_state_Nebraska
+  TYPE POLYGON
+  DATA tl_2017_us_state
+  STATUS OFF
+  FILTER ("[NAME]"="Nebraska")
+  CLASS
+  STYLE
+    COLOR 0 255 255
+  END
+  NAME "State_Nebraska"
+  OUTLINECOLOR 0 0 0
+  END
+END
+
+LAYER
+  NAME tl_2017_us_state_Nevada
+  TYPE POLYGON
+  DATA tl_2017_us_state
+  STATUS OFF
+  FILTER ("[NAME]"="Nevada")
+  CLASS
+  STYLE
+    COLOR 0 255 255
+  END
+  NAME "State_Nevada"
+  OUTLINECOLOR 0 0 0
+  END
+END
+
+LAYER
+  NAME tl_2017_us_state_New_Hampshire
+  TYPE POLYGON
+  DATA tl_2017_us_state
+  STATUS OFF
+  FILTER ("[NAME]"="New Hampshire")
+  CLASS
+  STYLE
+    COLOR 0 255 255
+  END
+  NAME "State_New_Hampshire"
+  OUTLINECOLOR 0 0 0
+  END
+END
+
+LAYER
+  NAME tl_2017_us_state_New_Jersey
+  TYPE POLYGON
+  DATA tl_2017_us_state
+  STATUS OFF
+  FILTER ("[NAME]"="New Jersey")
+  CLASS
+  STYLE
+    COLOR 0 255 255
+  END
+  NAME "State_New_Jersey"
+  OUTLINECOLOR 0 0 0
+  END
+END
+
+LAYER
+  NAME tl_2017_us_state_New_Mexico
+  TYPE POLYGON
+  DATA tl_2017_us_state
+  STATUS OFF
+  FILTER ("[NAME]"="New Mexico")
+  CLASS
+  STYLE
+    COLOR 0 255 255
+  END
+  NAME "State_New_Mexico"
+  OUTLINECOLOR 0 0 0
+  END
+END
+
+LAYER
+  NAME tl_2017_us_state_New_York
+  TYPE POLYGON
+  DATA tl_2017_us_state
+  STATUS OFF
+  FILTER ("[NAME]"="New York")
+  CLASS
+  STYLE
+    COLOR 0 255 255
+  END
+  NAME "State_New_York"
+  OUTLINECOLOR 0 0 0
+  END
+END
+
+LAYER
+  NAME tl_2017_us_state_North_Carolina
+  TYPE POLYGON
+  DATA tl_2017_us_state
+  STATUS OFF
+  FILTER ("[NAME]"="North Carolina")
+  CLASS
+  STYLE
+    COLOR 0 255 255
+  END
+  NAME "State_North_Carolina"
+  OUTLINECOLOR 0 0 0
+  END
+END
+
+LAYER
+  NAME tl_2017_us_state_North_Dakota
+  TYPE POLYGON
+  DATA tl_2017_us_state
+  STATUS OFF
+  FILTER ("[NAME]"="North Dakota")
+  CLASS
+  STYLE
+    COLOR 0 255 255
+  END
+  NAME "State_North_Dakota"
+  OUTLINECOLOR 0 0 0
+  END
+END
+
+LAYER
+  NAME tl_2017_us_state_Ohio
+  TYPE POLYGON
+  DATA tl_2017_us_state
+  STATUS OFF
+  FILTER ("[NAME]"="Ohio")
+  CLASS
+  STYLE
+    COLOR 0 255 255
+  END
+  NAME "State_Ohio"
+  OUTLINECOLOR 0 0 0
+  END
+END
+
+LAYER
+  NAME tl_2017_us_state_Oklahoma
+  TYPE POLYGON
+  DATA tl_2017_us_state
+  STATUS OFF
+  FILTER ("[NAME]"="Oklahoma")
+  CLASS
+  STYLE
+    COLOR 0 255 255
+  END
+  NAME "State_Oklahoma"
+  OUTLINECOLOR 0 0 0
+  END
+END
+
+LAYER
+  NAME tl_2017_us_state_Oregon
+  TYPE POLYGON
+  DATA tl_2017_us_state
+  STATUS OFF
+  FILTER ("[NAME]"="Oregon")
+  CLASS
+  STYLE
+    COLOR 0 255 255
+  END
+  NAME "State_Oregon"
+  OUTLINECOLOR 0 0 0
+  END
+END
+
+LAYER
+  NAME tl_2017_us_state_Pennsylvania
+  TYPE POLYGON
+  DATA tl_2017_us_state
+  STATUS OFF
+  FILTER ("[NAME]"="Pennsylvania")
+  CLASS
+  STYLE
+    COLOR 0 255 255
+  END
+  NAME "State_Pennsylvania"
+  OUTLINECOLOR 0 0 0
+  END
+END
+
+LAYER
+  NAME tl_2017_us_state_Puerto_Rico
+  TYPE POLYGON
+  DATA tl_2017_us_state
+  STATUS OFF
+  FILTER ("[NAME]"="Puerto Rico")
+  CLASS
+  STYLE
+    COLOR 0 255 255
+  END
+  NAME "State_Puerto_Rico"
+  OUTLINECOLOR 0 0 0
+  END
+END
+
+LAYER
+  NAME tl_2017_us_state_Rhode_Island
+  TYPE POLYGON
+  DATA tl_2017_us_state
+  STATUS OFF
+  FILTER ("[NAME]"="Rhode Island")
+  CLASS
+  STYLE
+    COLOR 0 255 255
+  END
+  NAME "State_Rhode_Island"
+  OUTLINECOLOR 0 0 0
+  END
+END
+
+LAYER
+  NAME tl_2017_us_state_South_Carolina
+  TYPE POLYGON
+  DATA tl_2017_us_state
+  STATUS OFF
+  FILTER ("[NAME]"="South Carolina")
+  CLASS
+  STYLE
+    COLOR 0 255 255
+  END
+  NAME "State_South_Carolina"
+  OUTLINECOLOR 0 0 0
+  END
+END
+
+LAYER
+  NAME tl_2017_us_state_South_Dakota
+  TYPE POLYGON
+  DATA tl_2017_us_state
+  STATUS OFF
+  FILTER ("[NAME]"="South Dakota")
+  CLASS
+  STYLE
+    COLOR 0 255 255
+  END
+  NAME "State_South_Dakota"
+  OUTLINECOLOR 0 0 0
+  END
+END
+
+LAYER
+  NAME tl_2017_us_state_Tennessee
+  TYPE POLYGON
+  DATA tl_2017_us_state
+  STATUS OFF
+  FILTER ("[NAME]"="Tennessee")
+  CLASS
+  STYLE
+    COLOR 0 255 255
+  END
+  NAME "State_Tennessee"
+  OUTLINECOLOR 0 0 0
+  END
+END
+
+LAYER
+  NAME tl_2017_us_state_Texas
+  TYPE POLYGON
+  DATA tl_2017_us_state
+  STATUS OFF
+  FILTER ("[NAME]"="Texas")
+  CLASS
+  STYLE
+    COLOR 0 255 255
+  END
+  NAME "State_Texas"
+  OUTLINECOLOR 0 0 0
+  END
+END
+
+LAYER
+  NAME tl_2017_us_state_United_States_Virgin_Islands
+  TYPE POLYGON
+  DATA tl_2017_us_state
+  STATUS OFF
+  FILTER ("[NAME]"="United States Virgin Islands")
+  CLASS
+  STYLE
+    COLOR 0 255 255
+  END
+  NAME "State_United_States_Virgin_Islands"
+  OUTLINECOLOR 0 0 0
+  END
+END
+
+LAYER
+  NAME tl_2017_us_state_Utah
+  TYPE POLYGON
+  DATA tl_2017_us_state
+  STATUS OFF
+  FILTER ("[NAME]"="Utah")
+  CLASS
+  STYLE
+    COLOR 0 255 255
+  END
+  NAME "State_Utah"
+  OUTLINECOLOR 0 0 0
+  END
+END
+
+LAYER
+  NAME tl_2017_us_state_Vermont
+  TYPE POLYGON
+  DATA tl_2017_us_state
+  STATUS OFF
+  FILTER ("[NAME]"="Vermont")
+  CLASS
+  STYLE
+    COLOR 0 255 255
+  END
+  NAME "State_Vermont"
+  OUTLINECOLOR 0 0 0
+  END
+END
+
+LAYER
+  NAME tl_2017_us_state_Virginia
+  TYPE POLYGON
+  DATA tl_2017_us_state
+  STATUS OFF
+  FILTER ("[NAME]"="Virginia")
+  CLASS
+  STYLE
+    COLOR 0 255 255
+  END
+  NAME "State_Virginia"
+  OUTLINECOLOR 0 0 0
+  END
+END
+
+LAYER
+  NAME tl_2017_us_state_Washington
+  TYPE POLYGON
+  DATA tl_2017_us_state
+  STATUS OFF
+  FILTER ("[NAME]"="Washington")
+  CLASS
+  STYLE
+    COLOR 0 255 255
+  END
+  NAME "State_Washington"
+  OUTLINECOLOR 0 0 0
+  END
+END
+
+LAYER
+  NAME tl_2017_us_state_West_Virginia
+  TYPE POLYGON
+  DATA tl_2017_us_state
+  STATUS OFF
+  FILTER ("[NAME]"="West Virginia")
+  CLASS
+  STYLE
+    COLOR 0 255 255
+  END
+  NAME "State_West_Virginia"
+  OUTLINECOLOR 0 0 0
+  END
+END
+
+LAYER
+  NAME tl_2017_us_state_Wisconsin
+  TYPE POLYGON
+  DATA tl_2017_us_state
+  STATUS OFF
+  FILTER ("[NAME]"="Wisconsin")
+  CLASS
+  STYLE
+    COLOR 0 255 255
+  END
+  NAME "State_Wisconsin"
+  OUTLINECOLOR 0 0 0
+  END
+END
+
+LAYER
+  NAME tl_2017_us_state_Wyoming
+  TYPE POLYGON
+  DATA tl_2017_us_state
+  STATUS OFF
+  FILTER ("[NAME]"="Wyoming")
+  CLASS
+  STYLE
+    COLOR 0 255 255
+  END
+  NAME "State_Wyoming"
+  OUTLINECOLOR 0 0 0
+  END
+END
+

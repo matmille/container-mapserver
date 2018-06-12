@@ -1,0 +1,486 @@
+---
+- hosts: local
+  name: Install MapServer.org (OpenSource)
+  connection: local
+  become: yes
+  vars:
+    dirname_gdal: gdal
+    dirname_geos: geos
+    dirname_map: mapserver
+    dirname_proj4: proj4
+    prefix: /opt
+    tmpdir: /tmp
+
+  tasks:
+  - name: Ensure packages are on host to build MapServer
+    package:
+      name: "{{ item }}"
+      state: present
+    with_items:
+      - autoconf
+      - automake
+      - cairo
+      - cairo-devel
+      - cmake
+      - freetype
+      - freetype-devel
+      - fribidi
+      - fribidi-devel
+      - gcc
+      - gcc-c++
+      - giflib
+      - giflib-devel
+      - git
+      - harfbuzz
+      - harfbuzz-devel
+      - java-1.8.0-openjdk
+      - java-1.8.0-openjdk-devel
+      - libcurl
+      - libcurl-devel
+      - libjpeg
+      - libjpeg-devel
+      - libpng
+      - libpng-devel
+      - librsvg2
+      - librsvg2-devel
+      - libtool
+      - libxml2
+      - libxml2-devel
+      - postgresql-devel
+      - postgresql-libs
+      - swig
+      - unzip
+      - zlib
+    tags:
+      - dependencies
+
+  - name: Clean artifact paths
+    file:
+      state: absent
+      path: "{{ item }}"
+    with_items:
+      - "{{ prefix }}/{{ dirname_gdal }}/"
+      - "{{ tmpdir }}/{{ dirname_gdal }}/"
+      - "{{ prefix }}/{{ dirname_geos }}/"
+      - "{{ tmpdir }}/{{ dirname_geos }}/"
+      - "{{ prefix }}/{{ dirname_map }}/"
+      - "{{ tmpdir }}/{{ dirname_map }}/"
+      - "{{ prefix }}/{{ dirname_proj4 }}/"
+      - "{{ tmpdir }}/{{ dirname_proj4 }}/"
+    tags:
+      - builds
+    
+  - name: Create staging directory
+    file:
+      path: "{{ item }}"
+      state: directory
+      mode: 0755
+    with_items:
+      - "{{ prefix }}/{{ dirname_gdal }}"
+      - "{{ tmpdir }}/{{ dirname_gdal }}"
+      - "{{ prefix }}/{{ dirname_geos }}"
+      - "{{ tmpdir }}/{{ dirname_geos }}"
+      - "{{ prefix }}/{{ dirname_map }}"
+      - "{{ tmpdir }}/{{ dirname_map }}"
+      - "{{ prefix }}/{{ dirname_proj4 }}"
+      - "{{ tmpdir }}/{{ dirname_proj4 }}"
+    tags:
+      - builds
+
+  - name: Download GEOS
+    git:
+      repo: https://github.com/OSGeo/geos.git
+      dest: "{{ tmpdir }}/{{ dirname_geos }}"
+    tags:
+      - builds
+      - build_geos
+
+  - name: GEOS autogen
+    shell: "./autogen.sh"
+    args:
+      chdir: "{{ tmpdir }}/{{ dirname_geos }}"
+    tags:
+      - builds
+      - build_geos
+
+  - name: GEOS build configure
+    shell: "./configure --with-pic=PIC --prefix={{ prefix }}/{{ dirname_geos }}"
+    args:
+      chdir: "{{ tmpdir }}/{{ dirname_geos }}"
+    tags:
+      - builds
+      - build_geos
+
+  - name: GEOS build make
+    shell: "make"
+    args:
+      chdir: "{{ tmpdir }}/{{ dirname_geos }}"
+    tags:
+      - builds
+      - build_geos
+
+  - name: GEOS build make install
+    shell: "make install"
+    args:
+      chdir: "{{ tmpdir }}/{{ dirname_geos }}"
+    tags:
+      - builds
+      - build_geos
+
+  - name: Download Prog.4
+    git:
+      repo: https://github.com/OSGeo/proj.4.git
+      dest: "{{ tmpdir }}/{{ dirname_proj4 }}"
+    tags:
+      - builds
+      - build_proj
+
+  - name: Proj autogen
+    shell: "./autogen.sh"
+    args:
+      chdir: "{{ tmpdir }}/{{ dirname_proj4 }}"
+    tags:
+      - builds
+      - build_proj
+
+  - name: Proj build configure
+    shell: "./configure --with-pic=PIC --prefix={{ prefix }}/{{ dirname_proj4 }}"
+    args:
+      chdir: "{{ tmpdir }}/{{ dirname_proj4 }}"
+    tags:
+      - builds
+      - build_proj
+
+  - name: Proj build make
+    shell: "make"
+    args:
+      chdir: "{{ tmpdir }}/{{ dirname_proj4 }}"
+    tags:
+      - builds
+      - build_proj
+
+  - name: Proj build make install
+    shell: "make install"
+    args:
+      chdir: "{{ tmpdir }}/{{ dirname_proj4 }}"
+    tags:
+      - builds
+      - build_proj
+
+  - name: Download GDAL
+    git:
+      repo: https://github.com/OSGeo/gdal
+      dest: "{{ tmpdir }}/{{ dirname_gdal }}"
+    tags:
+      - builds
+      - build_gdal
+
+  - name: GDAL build configure
+    shell: "./configure --with-pic=PIC --prefix={{ prefix }}/{{ dirname_gdal }} --with-proj={{ prefix }}/{{ dirname_proj4 }}"
+    args:
+      chdir: "{{ tmpdir }}/{{ dirname_gdal }}/{{ dirname_gdal }}"
+    tags:
+      - builds
+      - build_gdal
+
+  - name: GDAL build make
+    shell: "make"
+    args:
+      chdir: "{{ tmpdir }}/{{ dirname_gdal }}/{{ dirname_gdal }}"
+    async: 10800
+    poll: 0
+    register: make_gdal_status
+    tags:
+      - builds
+      - build_gdal
+
+  - name: 'Check on GDAL build check ...'
+    async_status: jid={{ make_gdal_status.ansible_job_id }}
+    register: job_result
+    until: job_result.finished
+    delay: 30
+    retries: 180
+    tags:
+      - builds
+      - build_gdal
+
+  - name: GDAL build make install
+    shell: "make install"
+    args:
+      chdir: "{{ tmpdir }}/{{ dirname_gdal }}/{{ dirname_gdal }}"
+    tags:
+      - builds
+      - build_gdal
+ 
+  - name: Download MapServer
+    git:
+      repo: https://github.com/mapserver/mapserver/
+      dest: "{{ tmpdir }}/{{ dirname_map }}"
+    tags:
+      - builds
+      - build_ms
+
+  - name: Create MapServer build directory
+    file:
+      path: "{{ item }}"
+      state: directory
+      mode: 0755
+    with_items:
+      - "{{ tmpdir }}/{{ dirname_map }}/build"
+    tags:
+      - builds
+      - build_ms
+
+  - name: Run the Cross-Platform Makefile Generator against the build files
+    shell: >
+      cmake -DCMAKE_INSTALL_PREFIX={{ prefix }}/{{ dirname_map }} \
+      -DCMAKE_INSTALL_LIBDIR=/lib \
+      -DCMAKE_PREFIX_PATH='{{ prefix }}/{{ dirname_gdal }};{{ prefix }}/{{ dirname_geos }};{{ prefix }}/{{ dirname_proj4 }}' \
+      -DWITH_CAIRO=1 \
+      -DWITH_CURL=1 \
+      -DWITH_FCGI=0 \
+      -DWITH_FRIBIDI=1 \
+      -DWITH_GDAL=1 \
+      -DWITH_GEOS=1 \
+      -DWITH_GIF=1 \
+      -DWITH_HARFBUZZ=1 \
+      -DWITH_JAVA=1 \
+      -DWITH_KML=1 \
+      -DWITH_LIBXML2=1 \
+      -DWITH_OGR=1  \
+      -DWITH_POSTGIS=1 \
+      -DWITH_PROJ=1 \
+      -DWITH_RSVG=1 \
+      -DWITH_WCS=1 \
+      -DWITH_WFS=1 \
+      -DWITH_WMS=1 \
+      -DCMAKE_CXX_FLAGS='-std=gnu++11'  ../ > ../configure.out.txt
+    args:
+      chdir: "{{ tmpdir }}/{{ dirname_map }}/build"
+    tags:
+      - builds
+      - build_ms
+      - build_ms_cmake
+
+  - name: Run make
+    shell: make
+    args:
+      chdir: "{{ tmpdir }}/{{ dirname_map }}/build"
+    tags:
+      - builds
+      - build_ms
+
+  - name: Run make install
+    shell: make install
+    args:
+      chdir: "{{ tmpdir }}/{{ dirname_map }}/build"
+    tags:
+      - builds
+      - build_ms
+
+  - name: Clean artifact paths after build
+    file:
+      state: absent
+      path: "{{ item }}"
+    with_items:
+      - "{{ tmpdir }}/{{ dirname_gdal }}/"
+      - "{{ tmpdir }}/{{ dirname_geos }}/"
+      - "{{ tmpdir }}/{{ dirname_map }}/"
+      - "{{ tmpdir }}/{{ dirname_proj4 }}/"
+    tags:
+      - builds
+      - builds_clean
+
+  - name: Ensure packages are on host to run MapServer
+    package:
+      name: "{{ item }}"
+      state: present
+    with_items:
+      - httpd
+    tags:
+      - httpd
+
+  - name: Allow HTTPD to follow symlinks
+    replace:
+      path: /etc/httpd/conf/httpd.conf
+      regexp: '^\s+Options None$'
+      replace: '    Options +FollowSymLinks'
+      backup: yes
+    tags:
+      - httpd
+
+  - name: Add symlink to mapserv in cgi-bin directory
+    file:
+      src: "{{ prefix }}/{{ dirname_map }}/bin/mapserv"
+      dest: /var/www/cgi-bin/mapserv
+      state: link
+    tags:
+      - httpd_mapserver_cgi
+
+  - name: Create noindex file for httpd
+    copy:
+      dest: "/etc/httpd/conf.d/mapserver.conf"
+      content: |
+        <LocationMatch "^/+$">
+          Options -Indexes
+          ErrorDocument 403 /cgi-bin/mapserv?map=/var/www/html/mapserver/maps/example.map&layer=bluemarble&mode=browse&template=openlayers
+        </LocationMatch>
+      owner: root
+      group: root
+      mode: 0644
+    tags:
+      - httpd_noindex
+
+  - name: Remove default configuration files
+    file:
+      state: absent
+      path: "/etc/httpd/conf.d/{{ item }}"
+    with_items:
+      - "autoindex.conf"
+      - "userdir.conf"
+      - "welcome.conf"
+    tags:
+      - httpd_noindex
+
+  - name: Create Mapserver directories
+    file:
+      path: "{{ item }}"
+      state: directory
+      owner: apache
+      group: apache
+      mode: 0775
+    with_items:
+      - /var/log/mapserver
+      - /var/www/html/mapserver
+      - /var/www/html/mapserver/data
+      - /var/www/html/mapserver/data/raster
+      - /var/www/html/mapserver/maps
+      - /var/www/html/mapserver/tmp
+    tags:
+      - maps
+
+  - name: Download GeoTIFF from NASA Earth Observations
+    get_url:
+      url: 'http://neo.sci.gsfc.nasa.gov/servlet/RenderData?si=526311&cs=rgb&format=TIFF&width=3600&height=1800'
+      dest: /var/www/html/mapserver/data/raster/bluemarble.tif
+      owner: apache
+      group: apache
+      mode: 0644
+      timeout: 600
+    tags:
+      - maps
+      - maps_nasa
+
+  - name: Download GeoTIFFs from Natural Earth
+    get_url:
+      url: "{{ item }}"
+      dest: /var/www/html/mapserver/data/raster
+      owner: apache
+      group: apache
+      timeout: 1200
+    with_items:
+      - "https://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/raster/HYP_HR_SR_OB_DR.zip"
+      - "https://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/raster/NE1_HR_LC_SR_W.zip"
+      - "https://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/raster/GRAY_HR_SR_OB.zip"
+    tags:
+      - maps
+      - maps_naturalearth
+
+  - name: Unzip Downloaded GeoTIFFs from Natural Earth
+    unarchive:
+      src: "/var/www/html/mapserver/data/raster/{{ item }}"
+      dest: /var/www/html/mapserver/data/raster
+      remote_src: no
+      owner: apache
+      group: apache
+    with_items:
+      - "HYP_HR_SR_OB_DR.zip"
+      - "NE1_HR_LC_SR_W.zip"
+      - "GRAY_HR_SR_OB.zip"
+    tags:
+      - maps
+      - maps_naturalearth
+
+  - name: Clean Natural Earth zip files
+    file:
+      state: absent
+      path: "/var/www/html/mapserver/data/raster/{{ item }}"
+    with_items:
+      - "HYP_HR_SR_OB_DR.zip"
+      - "NE1_HR_LC_SR_W.zip"
+      - "GRAY_HR_SR_OB.zip"
+    tags:
+      - maps
+      - maps_naturalearth
+
+  - name: Download Shapefiles from the US Census
+    unarchive:
+      src: "{{ item }}"
+      dest: /var/www/html/mapserver/data
+      remote_src: yes
+      owner: apache
+      group: apache
+      mode: 0644
+    with_items:
+      - "https://www2.census.gov/geo/tiger/TIGER2017/COUNTY/tl_2017_us_county.zip"
+      - "https://www2.census.gov/geo/tiger/TIGER2017/STATE/tl_2017_us_state.zip"
+    tags:
+      - maps
+      - maps_census
+
+  - name: Ensure debug file exists
+    copy:
+      content: ""
+      dest: /var/log/mapserver/debug
+      force: no
+      group: apache
+      owner: apache
+      mode: 0600
+    tags:
+      - maps
+
+  - name: Ensure map file exists
+    copy:
+      src: files/example.map
+      dest: /var/www/html/mapserver/maps/example.map
+      owner: apache
+      group: apache
+      mode: 0644
+    tags:
+      - maps
+
+  - name: Get start script
+    get_url:
+      url: https://raw.githubusercontent.com/projectatomic/docker-image-examples/master/rhel-httpd/run-apache.sh
+      dest: /
+      mode: 0755
+      owner: apache
+      group: apache
+    tags:
+      - startscript
+
+  - name: Ensure devel and build packages are removed
+    package:
+      name: "{{ item }}"
+      state: present
+    with_items:
+      - autoconf
+      - automake
+      - cairo-devel
+      - cmake
+      - freetype-devel
+      - fribidi-devel
+      - gcc
+      - gcc-c++
+      - giflib-devel
+      - git
+      - harfbuzz-devel
+      - java-1.8.0-openjdk-devel
+      - libcurl-devel
+      - libjpeg-devel
+      - libpng-devel
+      - librsvg2-devel
+      - libxml2-devel
+      - postgresql-devel
+    tags:
+      - rm_build_packages
