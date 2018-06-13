@@ -28,6 +28,39 @@ LAYER
 END
 
 LAYER
+  NAME "GRAY_HR_SR_OB"
+  METADATA
+    "wms_title" "Gray Earth with Shaded Relief, Hypsography, and Ocean Bottom"
+    "wms_attribution_title" "Natural Earth at www.naturalearthdata.com"
+  END
+  TYPE RASTER
+  STATUS OFF
+  DATA "/var/www/html/mapserver/data/raster/GRAY_HR_SR_OB/GRAY_HR_SR_OB.tif"
+END
+
+LAYER
+  NAME "HYP_HR_SR_OB_DR"
+  METADATA
+    "wms_title" "Cross Blended Hypso with Relief, Water, Drains, and Ocean Bottom"
+    "wms_attribution_title" "Natural Earth at www.naturalearthdata.com"
+  END
+  TYPE RASTER
+  STATUS OFF
+  DATA "/var/www/html/mapserver/data/raster/HYP_HR_SR_OB_DR/HYP_HR_SR_OB_DR.tif"
+END
+
+LAYER
+  NAME "NE1_HR_LC_SR_W"
+  METADATA
+    "wms_title" "Natural Earth I with Shaded Relief, Water, and Drainages"
+    "wms_attribution_title" "Natural Earth at www.naturalearthdata.com"
+  END
+  TYPE RASTER
+  STATUS OFF
+  DATA "/var/www/html/mapserver/data/raster/NE1_HR_LC_SR_W/NE1_HR_LC_SR_W.tif"
+END
+
+LAYER
   NAME tl_2017_us_state
   TYPE POLYGON
   DATA tl_2017_us_state
