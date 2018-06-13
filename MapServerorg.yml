@@ -112,7 +112,7 @@
       - build_geos
 
   - name: GEOS build make
-    shell: "make"
+    shell: "make -j {{ ansible_processor_vcpus }}"
     args:
       chdir: "{{ tmpdir }}/{{ dirname_geos }}"
     tags:
@@ -152,7 +152,7 @@
       - build_proj
 
   - name: Proj build make
-    shell: "make"
+    shell: "make -j {{ ansible_processor_vcpus }}"
     args:
       chdir: "{{ tmpdir }}/{{ dirname_proj4 }}"
     tags:
@@ -184,7 +184,7 @@
       - build_gdal
 
   - name: GDAL build make
-    shell: "make"
+    shell: "make -j {{ ansible_processor_vcpus }}"
     args:
       chdir: "{{ tmpdir }}/{{ dirname_gdal }}/{{ dirname_gdal }}"
     async: 10800
@@ -263,7 +263,7 @@
       - build_ms_cmake
 
   - name: Run make
-    shell: make
+    shell: "make -j {{ ansible_processor_vcpus }}"
     args:
       chdir: "{{ tmpdir }}/{{ dirname_map }}/build"
     tags:
