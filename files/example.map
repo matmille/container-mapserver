@@ -503,21 +503,6 @@ LAYER
 END
 
 LAYER
-  NAME tl_2017_us_state_NAME:_String_(100.0)
-  TYPE POLYGON
-  DATA tl_2017_us_state
-  STATUS OFF
-  FILTER ("[NAME]"="NAME: String (100.0)")
-  CLASS
-  STYLE
-    COLOR 0 255 255
-  END
-  NAME "State_NAME:_String_(100.0)"
-  OUTLINECOLOR 0 0 0
-  END
-END
-
-LAYER
   NAME tl_2017_us_state_Nebraska
   TYPE POLYGON
   DATA tl_2017_us_state
