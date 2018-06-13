@@ -462,7 +462,7 @@
   - name: Ensure devel and build packages are removed
     package:
       name: "{{ item }}"
-      state: present
+      state: absent
     with_items:
       - autoconf
       - automake
