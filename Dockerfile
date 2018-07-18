@@ -20,6 +20,6 @@ COPY files/example.map /files
 RUN ansible-playbook /MapServerorg.yml  
 RUN yum clean all
 
-EXPOSE 80
+EXPOSE 8080
 
 CMD ["/run-apache.sh"]
