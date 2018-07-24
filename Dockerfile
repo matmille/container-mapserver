@@ -20,8 +20,6 @@ COPY files/example.map /files
 RUN ansible-playbook /MapServerorg.yml  
 RUN yum clean all
 
-USER root
-
 EXPOSE 8080
 
 
