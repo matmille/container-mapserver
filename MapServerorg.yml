@@ -48,6 +48,8 @@
       - libxml2-devel
       - postgresql-devel
       - postgresql-libs
+      - protobuf-c
+      - protobuf-c-devel
       - swig
       - unzip
       - zlib
@@ -491,5 +493,6 @@
       - librsvg2-devel
       - libxml2-devel
       - postgresql-devel
+      - protobuf-c-devel
     tags:
       - rm_build_packages
