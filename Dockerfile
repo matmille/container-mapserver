@@ -1,6 +1,8 @@
 FROM httpd-24-rhel7
 MAINTAINER "Matthew Miller" <matmille@redhat.com>
 
+USER root
+
 RUN yum repolist --disablerepo=* \
         && yum-config-manager --disable \* > /dev/null  \
         && yum-config-manager --enable rhel-7-server-rpms \
@@ -19,6 +21,8 @@ COPY files/example.map /files
 
 RUN ansible-playbook /MapServerorg.yml  
 RUN yum clean all
+
+USER default
 
 EXPOSE 8080
 
