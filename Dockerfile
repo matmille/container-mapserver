@@ -1,4 +1,4 @@
-FROM rhel
+FROM httpd-24-rhel7
 MAINTAINER "Matthew Miller" <matmille@redhat.com>
 
 RUN yum repolist --disablerepo=* \
@@ -20,7 +20,6 @@ COPY files/example.map /files
 RUN ansible-playbook /MapServerorg.yml  
 RUN yum clean all
 
-USER apache:apache
 EXPOSE 8080
 
-CMD ["/run-apache.sh"]
+
