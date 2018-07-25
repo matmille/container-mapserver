@@ -8,7 +8,8 @@ RUN yum repolist --disablerepo=* \
         && yum-config-manager --enable rhel-7-server-rpms \
         && yum-config-manager --enable rhel-7-server-extras-rpms \
         && yum-config-manager --enable rhel-7-server-optional-rpms \
-        && yum-config-manager --enable rhel-7-server-ansible-2.5-rpms 
+        && yum-config-manager --enable rhel-server-rhscl-7-rpms \
+        && yum-config-manager --enable rhel-7-server-ansible-2-rpms 
 
 RUN yum -y update; yum clean all
 RUN yum -y install ansible; yum clean all
