@@ -298,7 +298,7 @@
       name: "{{ item }}"
       state: present
     with_items:
-      - httpd
+      - httpd24-httpd
     tags:
       - httpd
 
