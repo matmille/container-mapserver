@@ -357,7 +357,7 @@
     file:
       path: "{{ item }}"
       state: directory
-      owner: apache
+      owner: default
       group: apache
       mode: 0775
     with_items:
@@ -374,7 +374,7 @@
     get_url:
       url: 'http://neo.sci.gsfc.nasa.gov/servlet/RenderData?si=526311&cs=rgb&format=TIFF&width=3600&height=1800'
       dest: /var/www/html/mapserver/data/raster/bluemarble.tif
-      owner: apache
+      owner: default
       group: apache
       mode: 0644
       timeout: 600
@@ -386,7 +386,7 @@
     get_url:
       url: "{{ item }}"
       dest: /var/www/html/mapserver/data/raster
-      owner: apache
+      owner: default
       group: apache
       timeout: 1200
     with_items:
@@ -402,7 +402,7 @@
       src: "/var/www/html/mapserver/data/raster/{{ item }}"
       dest: /var/www/html/mapserver/data/raster
       remote_src: no
-      owner: apache
+      owner: default
       group: apache
     with_items:
       - "HYP_HR_SR_OB_DR.zip"
@@ -429,7 +429,7 @@
       src: "{{ item }}"
       dest: /var/www/html/mapserver/data
       remote_src: yes
-      owner: apache
+      owner: default
       group: apache
       mode: 0644
     with_items:
@@ -444,7 +444,7 @@
       content: ""
       dest: /var/log/mapserver/debug
       force: no
-      group: apache
+      group: default
       owner: apache
       mode: 0600
     tags:
@@ -454,21 +454,11 @@
     copy:
       src: files/example.map
       dest: /var/www/html/mapserver/maps/example.map
-      owner: apache
+      owner: default
       group: apache
       mode: 0644
     tags:
       - maps
-
-  - name: Get start script
-    get_url:
-      url: https://raw.githubusercontent.com/projectatomic/docker-image-examples/master/rhel-httpd/run-apache.sh
-      dest: /
-      mode: 0755
-      owner: apache
-      group: apache
-    tags:
-      - startscript
 
   - name: Ensure devel and build packages are removed
     package:
