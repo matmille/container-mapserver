@@ -71,6 +71,7 @@
       - "{{ tmpdir }}/{{ dirname_proj4 }}/"
     tags:
       - builds
+      - dependencies
     
   - name: Create staging directory
     file:
@@ -88,6 +89,7 @@
       - "{{ tmpdir }}/{{ dirname_proj4 }}"
     tags:
       - builds
+      - dependencies
 
   - name: Download GEOS
     git:
@@ -326,6 +328,7 @@
       dest: /var/www/cgi-bin/mapserv
       state: link
     tags:
+      - httpd
       - httpd_mapserver_cgi
 
   - name: Create noindex file for httpd
@@ -340,6 +343,7 @@
       group: root
       mode: 0644
     tags:
+      - httpd
       - httpd_noindex
 
   - name: Remove default configuration files
@@ -351,6 +355,7 @@
       - "userdir.conf"
       - "welcome.conf"
     tags:
+      - httpd
       - httpd_noindex
 
   - name: Create Mapserver directories
