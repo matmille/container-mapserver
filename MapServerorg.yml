@@ -402,8 +402,8 @@
       content: ""
       dest: /var/log/mapserver/debug
       force: no
-      group: default
-      owner: apache
+      owner: default
+      group: apache
       mode: 0600
     tags:
       - maps
