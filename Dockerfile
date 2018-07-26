@@ -20,16 +20,7 @@ RUN mkdir -p /files
 COPY MapServerorg.yml /
 COPY files/example.map /files
 
-RUN ansible-playbook /MapServerorg.yml --tags "dependencies"
-RUN ansible-playbook /MapServerorg.yml --tags "build_geos"
-RUN ansible-playbook /MapServerorg.yml --tags "build_proj"
-RUN ansible-playbook /MapServerorg.yml --tags "build_gdal"
-RUN ansible-playbook /MapServerorg.yml --tags "build_ms"
-RUN ansible-playbook /MapServerorg.yml --tags "builds_clean"
-RUN ansible-playbook /MapServerorg.yml --tags "httpd"
-RUN ansible-playbook /MapServerorg.yml --tags "maps"
-RUN ansible-playbook /MapServerorg.yml --tags "rm_build_packages"
-RUN ansible-playbook /MapServerorg.yml --tags "dependencies"
+RUN ansible-playbook /MapServerorg.yml
 
 RUN yum -y remove ansible; yum clean all
 
