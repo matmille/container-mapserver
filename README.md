@@ -9,7 +9,7 @@ Map data pulled from NASA (bluemarble) and the Census (shapefiles)
 
 ## Prerequisite
 
-This project requires the httpd-24-rhel7 container image provided by Red Hat Software Collections via the Red Hat container registry
+This project requires the httpd-24-rhel7 container image provided by Red Hat Software Collections via the Red Hat container registry:
 https://access.redhat.com/containers/?tab=overview#/registry.access.redhat.com/rhscl/httpd-24-rhel7
 
 ## Getting started (example)
