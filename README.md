@@ -9,7 +9,7 @@ This repo contains a Dockerfile for perform a container build and a Ansible play
 ## Getting started (example)
 
 ```
-oc login <your login parameters>
+oc login <your login parameters to your OpenShift cluster>
 oc new-project <project name>
 oc new-build https://github.com/matmille/container-mapserver.git
 ```
