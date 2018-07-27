@@ -7,6 +7,11 @@ This repository is meant to showcase performing a package build inside the OpenS
 This repo contains a Dockerfile for perform a container build and a Ansible playbook to do the heavy lifting
 Map data pulled from NASA (bluemarble) and the Census (shapefiles)
 
+## Prerequisite
+
+This project requires the httpd-24-rhel7 container image provided by Red Hat Software Collections via the Red Hat container registry
+https://access.redhat.com/containers/?tab=overview#/registry.access.redhat.com/rhscl/httpd-24-rhel7
+
 ## Getting started (example)
 
 ```
