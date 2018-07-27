@@ -1,4 +1,4 @@
-# Implementing a MapServer (mapserver.org) Open Source map platform inside of a container
+## Implementing a MapServer (mapserver.org) Open Source map platform inside of a container
 
 This repository is meant to showcase performing a package build inside the OpenShift Container Platform
 
