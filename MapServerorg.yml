@@ -375,6 +375,20 @@
     tags:
       - maps
 
+
+  - name: Create Mapserver directories
+    file:
+      path: "{{ item }}"
+      state: directory
+      owner: default
+      group: apache
+      mode: 1777
+    with_items:
+      - /var/www/html/mapserver/tmp
+    tags:
+      - maps
+
+
   - name: Download GeoTIFF from NASA Earth Observations
     get_url:
       url: 'http://neo.sci.gsfc.nasa.gov/servlet/RenderData?si=526311&cs=rgb&format=TIFF&width=3600&height=1800'
