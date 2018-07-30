@@ -14,8 +14,6 @@ WEB
   IMAGEURL  '/ms_tmp/'
 END
 
-CONFIG "MS_ERRORFILE" "/var/log/mapserver/debug"
-
 LAYER
   NAME "bluemarble"
   METADATA
