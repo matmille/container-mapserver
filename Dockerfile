@@ -24,7 +24,7 @@ RUN ansible-playbook /MapServerorg.yml
 
 RUN yum -y remove ansible; yum clean all
 
-USER default
+USER 1001
 
 EXPOSE 8080
 
