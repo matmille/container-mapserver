@@ -402,17 +402,6 @@
       - maps
       - maps_census
 
-  - name: Ensure debug file exists
-    copy:
-      content: ""
-      dest: /var/log/mapserver/debug
-      force: no
-      owner: default
-      group: apache
-      mode: 0600
-    tags:
-      - maps
-
   - name: Ensure map file exists
     copy:
       src: files/example.map
