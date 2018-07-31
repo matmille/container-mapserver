@@ -77,7 +77,7 @@
     file:
       path: "{{ item }}"
       state: directory
-      mode: 0755
+      mode: "0755"
     with_items:
       - "{{ prefix }}/{{ dirname_gdal }}"
       - "{{ tmpdir }}/{{ dirname_gdal }}"
@@ -228,7 +228,7 @@
     file:
       path: "{{ item }}"
       state: directory
-      mode: 0755
+      mode: "0755"
     with_items:
       - "{{ tmpdir }}/{{ dirname_map }}/build"
     tags:
@@ -341,7 +341,7 @@
         </LocationMatch>
       owner: root
       group: root
-      mode: 0644
+      mode: "0644"
     tags:
       - httpd
       - httpd_noindex
@@ -364,7 +364,7 @@
       state: directory
       owner: default
       group: apache
-      mode: 0775
+      mode: "0775"
     with_items:
       - /var/log/mapserver
       - /var/www/html/mapserver
@@ -382,7 +382,7 @@
       state: directory
       owner: default
       group: apache
-      mode: 1777
+      mode: "1777"
     with_items:
       - /var/www/html/mapserver/tmp
     tags:
@@ -395,7 +395,7 @@
       dest: /var/www/html/mapserver/data/raster/bluemarble.tif
       owner: default
       group: apache
-      mode: 0644
+      mode: "0644"
       timeout: 600
     tags:
       - maps
@@ -408,7 +408,7 @@
       remote_src: yes
       owner: default
       group: apache
-      mode: 0644
+      mode: "0644"
     with_items:
       - "https://www2.census.gov/geo/tiger/TIGER2017/COUNTY/tl_2017_us_county.zip"
       - "https://www2.census.gov/geo/tiger/TIGER2017/STATE/tl_2017_us_state.zip"
@@ -422,7 +422,7 @@
       dest: /var/www/html/mapserver/maps/example.map
       owner: default
       group: apache
-      mode: 0644
+      mode: "0644"
     tags:
       - maps
 
